@@ -1,0 +1,543 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  --white: #ffffff;
+  --first-color: #005565;
+  --second-color: #00839b;
+  --third-color: #bddde3;
+  --color-fourth: #282c2b;
+  --header-bg: #00839b;
+  --menu-link: #525252;
+  --button-bg: #6ca93d;
+  --button-bg-second: #6cab36;
+  --description-color: #636a69;
+  --backround-first: #eef4f5;
+  --background-second: #f1f9ff;
+  --background-third: #e8f5ff;
+  --bg-fourht: #ccdeeb;
+  --imgage-bg: #77bccd;
+  --image-border: #3a9fb4;
+  --teen-btn-color: #8c3191;
+  --kid-btn-color: #ad0068;
+
+  --accordian-body: #2e2e2e;
+
+  --mobile-menu-color: #445455;
+  --mobile-menu-hover-bg: #b9d0d6;
+  --mobile-menu-bg: #e4f0f3;
+  --mobile-menu-3rd-color: #7c7c7c;
+
+  --sidebar-bg: #001B20BF;
+
+}
+
+/*globally css*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000000;
+  line-height: 100%;
+}
+
+h1 {
+  font-size: 42px;
+  line-height: 45px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-family: EB Garamond;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 52px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: var(--first-color);
+}
+
+h3 {
+  font-size: 30px;
+  line-height: 23px;
+  font-weight: 600;
+}
+
+h4 {
+  font-family: Open Sans;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27.24px;
+  text-align: left;
+  color: var(--first-color);
+}
+
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 14px;
+  font-weight: 600;
+}
+p {
+  font-family: Open Sans;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  color: #636a69;
+}
+/* #maindiv,
+section.main-content {
+  min-height: 600px;
+} */
+#midcontent-area {
+  width: 100%;
+  float: left;
+  overflow: hidden;
+}
+#sidebar-first-area {
+  width: 30%;
+  float: left;
+  position: relative;
+  padding: 20px;
+  padding-left: 0;
+  z-index: 1;
+}
+body.sidebar-first #midcontent-area {
+  width: 67%;
+  float: right;
+}
+@media screen and (min-width: 0px) and (max-width: 767px) {
+  h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
+@media screen and (min-width: 767px) and (max-width: 1079px) {
+  h2 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+/* ------------------Component library ---------------  */
+/* ------------Text Accorian ---------------  */
+
+
+.paragraph--type--heading-for-accordion-section .field--name-field-title {
+    font-family: EB Garamond;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 52px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: var(--first-color);
+    margin-bottom: 1.5rem !important;
+}
+
+.text-accordian-middle .accordion-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-family: Open Sans;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--color-fourth);
+    background: var(--backround-first);
+    border-radius: 8px !important;
+    padding: 18px 15px 18px 20px;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+.text-accordian-middle .accordion-body {
+  padding-left: 24px;
+}
+.text-accordian-middle .accordion-button::before {
+    position: absolute;
+    content: "";
+    width: 26px;
+    height: 26px;
+    background: url("../images/Vector-circle.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: calc(50% - 1px);
+    right: 8px;
+    transform: translateY(-50%);
+}
+.text-accordian-middle .accordion-button::after {
+    background: url("../images/Vector-down.png");
+    width: 11px;
+    height: 7px;
+    background-size: contain;
+    background-repeat: no-repeat;
+	rotate: 180deg;
+}
+.text-accordian-middle .accordion-button.collapsed::after {
+  background: url("../images/Vector-down.png");
+  width: 11px;
+  height: 7px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 2px;
+  rotate: unset !important
+}
+.text-accordian-middle .accordion-button::after {
+  margin-bottom: 3px;
+}
+.text-accordian-parent .accordion-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-family: Open Sans;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--color-fourth);
+  background: var(--backround-first);
+  border-radius: 8px;
+  padding: 18px 15px 18px 20px;
+}
+.text-accordian-parent .accordion-button::before {
+  position: absolute;
+  content: "";
+  width: 26px;
+  height: 26px;
+  background: url("../images/Vector-circle.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: calc(50% - 1px);
+  right: 8px;
+  transform: translateY(-50%);
+}
+.text-accordian-parent .accordion-button::after {
+  background: url("../images/Vector-down.png");
+  width: 11px;
+  height: 7px;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+}
+.text-accordian-parent .accordion-button.collapsed::after {
+  background: url("../images/Vector-down.png");
+  width: 11px;
+  height: 7px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 2px; 
+  
+}
+.text-accordian-parent .accordion-button::after {
+  margin-bottom: 3px;
+}
+.text-accordian-parent .accordion-item {
+  border: unset;
+  margin-bottom: 15px;
+}
+.text-accordian-parent .accordion-body,
+.text-accordian-middle .accordion-body p{
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  color: var(--accordian-body);
+}
+.text-accordian-parent .accordion-body,
+.text-accordian-parent .accordion-body p,
+.text-accordian-parent .accordion-body span {
+  background: unset !important;
+}
+.text-accordian-parent .accordion-button:active,
+.text-accordian-parent .accordion-button:focus,
+.text-accordian-parent button:focus:not(:focus-visible),
+.text-accordian-parent .accordion-button:checked {
+  outline: unset;
+  box-shadow: unset;
+}
+.text-accordian-middle ul li {
+  line-height: 32px;
+}
+/* ------------ Text card Grid ---------------  */
+.grid-text-wrapper .grid-text {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0px 15px;
+}
+.grid-text-wrapper .grid-text p {
+  background: var(--backround-first);
+  padding: 15px;
+}
+/* ------------ Main content video / Single main-video ---------------  */
+.custom-grid-video-listing {
+  display: flex;
+  max-width: 100%;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+.custom-grid-video-listing .custom-video-particular-listing,
+.multiple-grid-video-listing .custom-video-particular-listing,
+.multiple-grid-video-wrapper .custom-video-particular-listing {
+  width: 100%;
+  position: relative;
+}
+.custom-video-particular-listing video {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+.video-section {
+  display: none;
+}
+.custom-controls button {
+  position: absolute;
+  top: 0;
+  border: none;
+  left: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background: rgb(120, 120, 120, 0.5);
+}
+.multiple-grid-video-listing {
+  display: flex;
+}
+.multiple-grid-video-wrapper ul#pills-tab {
+  display: grid;
+  max-width: 100%;
+  gap: 15px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 0px !important;
+}
+.multiple-grid-video-wrapper ul#pills-tab button {
+  padding: 0;
+  background: unset;
+}
+.multiple-grid-video-wrapper .tab-pane.active .video-section,
+.multiple-grid-video-wrapper .tab-pane.active .thumbnail-section {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+}
+.playPauseBtn .btn-icon {
+  display: block;
+  font-size: 0;
+  background: url(../images/Polygon.png) center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.custom-grid-video-listing
+  .custom-video-particular-listing
+  .playPauseBtn
+  .btn-icon {
+  padding: 15%;
+}
+.multiple-grid-video-wrapper
+  .custom-video-particular-listing
+  .playPauseBtn
+  .btn-icon {
+  padding: 50px;
+  
+}
+.multiple-grid-video-wrapper #pills-tabContent {
+  margin-bottom: 30px;
+}
+.custom-grid-video-listing .custom-video-particular-listing .thumbnail-section {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+/* ------------------ Single main content video ------- */
+.single-main-content-video {
+  width: 100%;
+  position: relative;
+  margin-bottom: 30px;
+}
+.single-main-content-video .playPauseBtn .btn-icon,
+.single-main-content-video-accordian .playPauseBtn .btn-icon {
+  padding: 50px;
+}
+.single-main-content-video .thumbnail-section,
+.single-main-content-video .video-section,
+.single-main-content-video-accordian .thumbnail-section,
+.single-main-content-video-accordian .video-section {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 5/4;
+  object-fit: cover;
+  object-position: center;
+  max-height: 600px;
+}
+.single-main-content-video-accordian {
+  width: 100%;
+  position: relative;
+}
+.single-main-content-video-accordian-wrapper {
+  margin-bottom: 30px;
+  background: var(--backround-first);
+  border-radius: 8px;
+}
+.single-main-content-video-accordian-wrapper .accordion-button,
+.multiple-grid-video-wrapper .accordion-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-family: Open Sans;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  background: var(--backround-first);
+  /* border-radius: 8px; */
+  padding: 18px 15px 18px 20px;
+  outline: none;
+}
+.single-main-content-video-accordian-wrapper .accordion-button::before,
+.multiple-grid-video-wrapper .accordion-button::before {
+  position: absolute;
+  content: "";
+  width: 26px;
+  height: 26px;
+  background: url("../images/Vector-circle.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: calc(50% - 1px);
+  right: 8px;
+  transform: translateY(-50%);
+}
+.single-main-content-video-accordian-wrapper .accordion-button::after,
+.multiple-grid-video-wrapper .accordion-button::after {
+  background: url("../images/Vector-down.png");
+  width: 11px;
+  height: 7px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-bottom: 2px;
+}
+.single-main-content-video-accordian-wrapper .accordion-button.collapsed::after,
+.multiple-grid-video-wrapper .accordion-button.collapsed::after {
+  margin-top: 2px;
+}
+.single-main-content-video-accordian-wrapper .accordion-body,
+.multiple-grid-video-wrapper .accordion-body {
+  background: var(--backround-first);
+}
+.paragraph--type--main-content-video-single-main-c iframe {
+  width: 100%;
+}
+.multiple-grid-video-wrapper {
+  background: var(--backround-first);
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+.multiple-grid-video-wrapper .accordion-body img {
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+.accordion-button:focus,
+.accordion-button:active {
+  box-shadow: none;
+}
+/* -------------------- age-appropriate-advice (block type)------------ */
+.age-appropriate-advice {
+  margin-bottom: 30px;
+}
+.age-appropriate-advice .parent,
+.age-appropriate-advice .teenagers,
+.age-appropriate-advice .kid {
+  text-align: center;
+}
+.age-appropriate-advice .heading  {
+  font-family: EB Garamond;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 64px;
+  margin-top: 20px;
+}
+.age-appropriate-advice .parent .heading {
+  color: var(--second-color);
+}
+.age-appropriate-advice .teenagers .heading {
+  color: var(--teen-btn-color);
+}
+.age-appropriate-advice .kid .heading {
+  color: var(--kid-btn-color);
+}
+.age-appropriate-advice .cta a {
+  padding: 16px 32px;
+  border-radius: 32px;
+  text-decoration: none;
+  color: var(--white);
+  display: block;
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 21.79px;
+  text-align: center;
+}
+.age-appropriate-advice .cta {
+  padding: 16px;
+  margin-top: 20px;
+}
+.age-appropriate-advice .parent .cta a {
+  background: var(--second-color);
+}
+.age-appropriate-advice .teenagers .cta a {
+  background: var(--teen-btn-color);
+}
+.age-appropriate-advice .kid .cta a {
+  background: var(--kid-btn-color);
+}
+.age-appropriate-advice .image img {
+  /* width: 220px; */
+  width: auto;
+  height: 200px;
+}
+.age-appropriate-advice .top-heading {
+  font-family: EB Garamond;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 64px;
+}
+.age-appropriate-advice .top-description {
+  font-family: Open Sans;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 40px;
+  color: var(--accordian-body);
+}
+.age-appropriate-advice .desscription {
+  color: var(--accordian-body);
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center; 
+}

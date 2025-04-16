@@ -1,0 +1,36 @@
+{#
+/**
+    * @file
+    * Default theme implementation to display a paragraph.
+    * @see template_preprocess_paragraph()
+    *
+    * @ingroup themeable
+    */
+#}
+
+{%
+    set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    'paragraph-id--' ~ paragraph.id(),
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    ]
+%}
+
+{% set color = paragraph.field_select_callout_icon.entity.field_color.0.color %}
+
+<div class="callout-section">
+    <div class="callout-img" style="border-right: 8px solid {{ color}};">
+        {# <img src="{{ file_url(paragraph.field_upload_image.entity.uri.value) }}" class="img-fluid" loading="lazy" alt="{{ paragraph.field_upload_image.alt }}"> #}
+        {% for item in paragraph.field_select_callout_icon %}
+        <img src="{{ file_url(item.entity.field_upload_callout_image.entity.uri.value) }}" class="img-fluid" loading="lazy" alt="Callouts">
+        {% endfor %}    
+        
+    </div>
+    <div class="callout-content">
+        <h4 class="callout-title style="color: {{color}}">{{ paragraph.field_title.value|raw }}</h4>
+        {# <div class="callout-description">{{ paragraph.field_descriptions.value|raw|striptags|replace({'&nbsp;': ' '}) }}</div> #}
+        <div class="callout-description">{{ content.field_descriptions }}</div>
+    </div>
+</div>

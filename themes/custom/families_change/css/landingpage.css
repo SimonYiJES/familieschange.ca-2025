@@ -1,0 +1,225 @@
+.landing-page-data {
+    background:#005565 url(../images/parent-banner-bg.jpg) no-repeat;
+    background-size: cover;
+    padding: 135px 0;
+    margin-bottom: 25px;
+    background-position: center;
+}
+.teen-page .landing-page-data {
+    background:#800080 url(../images/teens-banner-bg.jpg) no-repeat;
+}
+.landing-page-data .container {
+    max-width: 1100px;
+}
+.landing-page-data .container h2 {
+    font-size: 4rem;
+    margin-bottom: 40px;
+    text-align: right;
+    color: var(--white);
+}
+.landing-page-data .container p {
+    font-size: 2.5rem;
+    line-height: 60px;
+    color: var(--white);
+    padding-left: 27px;
+}
+.landing-page-section .region-content{
+    padding: 0 !important;
+}
+
+.landing-topic-page-wrapper .landing-topic-page-links a {
+    padding: 16px 32px 16px 45px;
+    background: var(--button-bg-second);
+    font-family: Open Sans;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21.79px;
+    text-align: left;
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+}
+.landing-topic-page-wrapper .landing-topic-page-image img {
+    border-radius: 30px;
+    max-width: 100%;
+   
+}
+.landing-topic-page-wrapper .row {
+    padding-bottom: 100px;
+}
+.landing-topic-page-items .landing-topic-page-body {
+    margin-top: 29px;
+}
+.landing-topic-page-wrapper .landing-Topic-page-image .video-section-item {
+    min-height: 380px !important;
+}
+
+.landing-page-tile-body h2 {
+    font-family: EB Garamond;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 52px;
+    letter-spacing: 0.01em;
+    color: var(--white);
+    padding-top:195px;
+    text-align: end;
+    padding-right: 28px;
+}
+.landing-page-tile-body .field--name-body p{
+    font-family: Open Sans !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    line-height: 32px;
+    color: var(--white);
+    padding-top: 10px;
+    padding-bottom: 135px;
+}
+.landing-page-tile-body-wrapper {
+    width: 550px;
+    margin: auto;
+}
+/* /////////////////////////////////////////////////// */
+.footer-top-column-first .field--type-text-with-summary {
+    float: left;
+}
+#footer-area #block-families-change-footerlogo {
+    margin-top: 125px;
+}
+#block-families-change-justiceeducationsociety {
+    margin-top: 25px;
+}
+/* .paragraph-id--181 .landing-topic-page-wrapper .landing-topic-page-links a::before{
+    position: absolute;
+    content: "";
+    width: 14px;
+    height: 16px;
+    background: url(../images/playicon.png);
+    background-size: contain;
+    left: 25px;
+    top: 20px;
+}
+.paragraph-id--177 .landing-topic-page-items {
+    padding: 0 120px 0 130px;
+}
+
+.paragraph-id--177 .landing-topic-page-image {
+    padding-right: 125px;
+}
+.paragraph-id--178 .landing-topic-page-items {
+    padding: 0px 85px 0 175px;
+}
+.paragraph-id--178 .landing-topic-page-image {
+    margin-right: -169px;
+}
+.paragraph-id--179 .landing-topic-page-items {
+    padding: 0px 85px 0 130px;
+}
+.paragraph-id--180 .landing-topic-page-items {
+    padding: 0px 65px 0 130px;
+}
+.paragraph-id--180 .landing-topic-page-image {
+    margin-right: -110px;
+}
+.paragraph-id--181 .landing-topic-page-items {
+    padding: 0px 115px 0 130px;
+}
+.paragraph-id--180 .landing-topic-page-image {
+    margin-left: -30px;
+} */
+
+
+/* ////////////////////////////////////////////////////////////// */
+@media (max-width: 1024px) and (min-width: 769px){
+
+    .footer-top-column-first .field--name-body img {
+        width: 110px;
+        /* height: 70px; */
+
+    }
+}
+
+@media (max-width: 768px){
+    .landing-topic-page-wrapper .row {
+        flex-direction: column-reverse !important;
+
+    }
+    .landing-page-data .container .field--type-text-with-summary{
+        padding-bottom: 20px !important;
+    }
+    .landing-topic-page-items {
+        width: 100%;
+        padding: 50px !important;
+        padding-top: 0 !important;
+    }
+    .landing-topic-page-image-media {
+        display:block !important;
+    }
+    .landing-topic-page-image {
+        display: none !important;
+    }
+    .landing-page-heading-body-cta {
+        text-align: center !important;
+        margin-top: 45px;
+    }
+    .landing-topic-page-image-media img {
+        border-radius: 30px;
+        /* object-fit: none; */
+    }
+    .Landing-Topic-page-heading h2 {
+        padding-bottom: 10px;
+        text-align: center !important;
+    }
+    .landing-page-data .container p {
+        font-size: 14px !important;
+        line-height: 24px !important;
+        font-weight: 400;
+    }
+    .landing-page-data .container h2 {
+        font-size: 24px !important;
+        line-height: 52px !important;
+        margin-bottom: 0px !important;
+        font-weight: 700;
+        padding-right: 25px !important;
+        
+    }
+    .landing-topic-page-body p {
+        text-align: center;
+    }
+    .landing-page-data {
+        padding: 28px 0;
+    }
+    .landing-topic-page-wrapper {
+        padding-top: unset !important; 
+        padding-bottom: unset !important; 
+    }
+    .landing-topic-page-wrapper .row {
+        padding-bottom: 0px !important;
+    }
+    .paragraph-id--181 .landing-topic-page-wrapper .landing-topic-page-links a {
+        position: relative;
+    }
+    .footer-title .navbar-brand a {
+        font-size: 20px;
+        line-height: 28px;
+     
+    }
+    .footer-top-column-first .field--name-body p{
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 14px;
+        word-break: break-word;
+    }
+    .footer-top-column-first .field--name-body img {
+        width: 75px !important;
+        height: auto !important;
+    }
+    .top-menu .nav.navbar-nav {
+        flex-direction: row-reverse;
+    }
+}
+@media (max-width: 425px) {
+    .footer-top-column-first .field--name-body img {
+        width: 60px !important;        
+    }
+    
+}

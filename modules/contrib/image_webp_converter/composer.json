@@ -1,0 +1,20 @@
+{
+  "name": "drupal/image_webp_converter",
+  "type": "drupal-module",
+  "description": "A module to convert images to WebP format using the rosell-dk/webp-convert library.",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Uttam Karmakar",
+      "homepage": "https://www.drupal.org/u/uttam"
+    },
+    {
+      "name": "Debrup pramanik",
+      "homepage": "https://www.drupal.org/u/debrup"
+    }
+  ],
+  "require": {
+    "rosell-dk/webp-convert": "^2.9"
+  }
+}

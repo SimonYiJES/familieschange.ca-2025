@@ -1,0 +1,49 @@
+:root {
+  --white: #ffffff;
+  --first-color: #4B1B4E; /* --- */
+  --second-color: #AE3EB4;  /* --- */
+  --third-color: #E3BDD1;  /* --- */
+  --color-fourth: #282C2B;
+  --header-bg: #8C3191; /* --- */
+  --menu-link: #525252;
+  --button-bg: #6CA93D;
+  --button-bg-second: #6CAB36;
+  --description-color: #636A69;
+  --backround-first: #EEF4F5;
+  --background-second: #F4EEF5; /* --- */
+  --background-third: #F4EEF5;
+  --bg-fourht: #EEDAEF; /* --- */
+  --imgage-bg: #B38BB5; /* --- */
+  --image-border: #925A95; /* --- */
+
+  --sidebar-bg: linear-gradient(0deg, rgba(75, 27, 78, 0.5), rgba(75, 27, 78, 0.5)), linear-gradient(90deg, rgba(75, 27, 78, 0) 18.9%, #4B1B4E 100%); /* --- */
+
+  --accordian-body: #2E2E2E;
+}
+
+
+.success-stories-wrapper .right-section::before {
+  background: url('../images/before-pink.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.success-stories-wrapper .right-section::after {
+  background: url('../images/after-pink.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.success-stories-wrapper .views_slideshow_controls_text .views_slideshow_controls_text_previous a{
+  background: url(../images/circle-preview-pink.png);
+  background-size: cover;
+}
+.success-stories-wrapper .views_slideshow_controls_text .views_slideshow_controls_text_next a{
+  background: url(../images/circle-next-pink.png);
+  background-size: cover;
+}
+.top-menu .nav.navbar-nav li:last-child a::after {
+  background-image: url(../images/just-JES-green-02-teem.svg);
+  background-size: cover;
+}
+/* #sidebar-first-area .sidebar-bg::before {
+  background: 
+} */

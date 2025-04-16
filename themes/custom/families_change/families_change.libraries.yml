@@ -1,0 +1,26 @@
+global-styling:
+  css:
+    theme:
+      css/style.css: {}
+      css/theme.css: {}
+      css/layout.css: {}
+      css/mobile.css: {}
+      css/ipad.css: {}
+      css/components.css: {}
+      css/landingpage.css: {}
+  js:
+    js/simple.js: {}
+    js/custom.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+teen-styling:
+  css:
+    theme:
+      css/layout-teens.css: {}
+
+kids-styling:
+  css:
+    theme:
+      css/layout-kids.css: {}

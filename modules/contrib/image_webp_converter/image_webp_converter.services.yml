@@ -1,0 +1,4 @@
+services:
+  image_webp_converter.service:
+    class: Drupal\image_webp_converter\Service\ImageBatchConverter
+    arguments: ['@entity_type.manager', '@entity_field.manager', '@file_system', '@file.usage', '@logger.factory', '@string_translation', '@messenger', '@database', '@file_url_generator', '@config.factory']

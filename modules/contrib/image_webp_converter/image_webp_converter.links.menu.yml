@@ -1,0 +1,6 @@
+image_webp_converter.link:
+  title: 'Image WebP Converter'
+  description: 'Batch process images to convert them to WebP format.'
+  route_name: image_webp_converter.batch_form
+  parent: system.admin_config_media
+  weight: 0

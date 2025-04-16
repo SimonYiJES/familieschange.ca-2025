@@ -1,0 +1,100 @@
+<?php
+
+ /**
+ * Block suggestions for custom block bundles.
+ */
+function families_change_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  if (isset($variables['elements']['content']['#block_content'])) {
+    array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node templates.
+ */
+function families_change_preprocess_node(&$variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  // \Drupal::logger('families_change')->warning('<pre><code>'.print_r($alias,TRUE).'</code></pre>');
+  if (strpos($alias, '/teen') !== FALSE || strpos($alias, '/adolescents') !== FALSE || strpos($alias, '/teens') !== FALSE) {
+    $variables['#attached']['library'][] = 'families_change/teen-styling';
+  }
+  if (strpos($alias, '/kids') !== FALSE) {
+    $variables['#attached']['library'][] = 'families_change/kids-styling';
+  }
+  
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for paragraph templates.
+ */
+function families_change_preprocess_paragraph__main_content_video_single_main_c(&$variables) {
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['lang_code'] = $language;
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function families_change_preprocess_html(&$variables) {
+  $request = \Drupal::request();
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  if ($node = $request->attributes->get('node')) {
+    if (strpos($alias, '/teen') !== FALSE || ($language === 'fr' && strpos($alias, '/adolescents') !== FALSE)) {
+      $variables['attributes']['class'][] = 'teen-page';
+      \Drupal::configFactory()->getEditable('system.site')->set('slogan', 'Teen')->save();
+    } else if (strpos($alias, '/parents') !== FALSE || ($language === 'fr' && strpos($alias, '/parentes') !== FALSE)){
+      $variables['attributes']['class'][] = 'parent-page';
+      \Drupal::configFactory()->getEditable('system.site')->set('slogan', 'Parents')->save();
+    }
+  }
+
+  $variables['attributes']['class'][] = $language;
+}
+
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function families_change_preprocess_paragraph(&$variables) {
+  // Check if the paragraph has the term reference field and if it has a value
+  if (isset($variables['field_upload_callout_image']) && $variables['field_upload_callout_image']->entity) {
+    $term = $variables['field_upload_callout_image']->entity;
+
+    // Debug the term entity to ensure it is correctly loaded
+    \Drupal::logger('custom')->notice('Term entity: <pre>@data</pre>', ['@data' => print_r($term, TRUE)]);
+
+    // Check if the term has the image field and if it has a value
+    if (isset($term->field_image->entity)) {
+      $image = $term->field_image->entity;
+
+      // Debug the image entity to ensure it is correctly loaded
+      \Drupal::logger('custom')->notice('Image entity: <pre>@data</pre>', ['@data' => print_r($image, TRUE)]);
+
+      // Generate the image URL
+      $variables['image_url'] = file_create_url($image->getFileUri());
+      $variables['image_alt'] = $image->alt;
+    } else {
+      \Drupal::logger('custom')->notice('No image field or image entity found in term.');
+    }
+  } else {
+    \Drupal::logger('custom')->notice('No term reference found in paragraph.');
+  }
+}
+
+
+use Symfony\Component\HttpFoundation\RedirectResponse; // ✅ Add this line
+
+function families_change_some_function() {
+  if (\Drupal::languageManager()->getCurrentLanguage()->getId() == 'fr') {
+    return new RedirectResponse('/fr/home');
+  }
+}
+
+
+
+
+

@@ -1,0 +1,13 @@
+{
+    "name": "drupal/vimeo_embed_field",
+    "type": "drupal-module",
+    "description": "Defines a Vimeo embed video field type and display the vimeo video as embed.",
+    "keywords": ["Drupal"],
+    "license": "GPL-2.0+",
+    "homepage": "https://www.drupal.org/project/vimeo_embed_field",
+    "minimum-stability": "dev",
+    "support": {
+      "issues": "https://www.drupal.org/project/issues/vimeo_embed_field"
+    },
+    "require": { }
+  }

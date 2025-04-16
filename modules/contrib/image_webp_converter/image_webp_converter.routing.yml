@@ -1,0 +1,14 @@
+image_webp_converter.batch_form:
+  path: '/admin/config/media/image-webp-converter'
+  defaults:
+    _form: '\Drupal\image_webp_converter\Form\ImageWebpBatchForm'
+    _title: 'Image WebP Converter'
+  requirements:
+    _permission: 'convert images to webp'
+image_webp_converter.settings:
+  path: '/admin/config/media/image-webp-settings-form'
+  defaults:
+    _form: '\Drupal\image_webp_converter\Form\ConverterSettingsForm'
+    _title: 'WebP Converter Settings'
+  requirements:
+    _permission: 'administer image webp converter'

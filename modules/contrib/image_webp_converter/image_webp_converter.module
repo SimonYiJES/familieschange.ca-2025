@@ -1,0 +1,418 @@
+<?php
+
+/**
+ * @file
+ * Providing different hooks related to this module.
+ */
+
+use Drupal\file\Entity\File;
+use WebPConvert\WebPConvert;
+use Drupal\file\FileInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\File\FileSystemInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function image_webp_converter_form_field_config_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Check if this is an image field.
+  if (!empty($form['settings']['file_extensions'])) {
+    // Get the current file extensions.
+    $extensions = explode(' ', $form['settings']['file_extensions']['#default_value']);
+    // Add webp if not already present.
+    if (!in_array('webp', $extensions)) {
+      $extensions[] = 'webp';
+      $form['settings']['file_extensions']['#default_value'] = implode(' ', $extensions);
+      $form['settings']['file_extensions']['#value'] = implode(' ', $extensions);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_submit().
+ */
+function image_webp_converter_form_field_config_edit_form_submit($form, FormStateInterface $form_state) {
+  if (isset($form['settings']['file_extensions'])) {
+    // Getting the current file extensions.
+    $extensions = explode(' ', $form_state->getValue(['settings', 'file_extensions']));
+    // Add webp if not already present.
+    if (!in_array('webp', $extensions)) {
+      $extensions[] = 'webp';
+    }
+
+    // Saving the updated file extensions back to the field settings.
+    $field_config = $form_state->getFormObject()->getEntity();
+    $field_config->set('settings', ['file_extensions' => implode(' ', $extensions)]);
+    $field_config->save();
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function image_webp_converter_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  // Checking if the form ID is for a node add or node edit form.
+  if (preg_match('/^node_[a-zA-Z0-9_]+_(form|edit_form)$/', $form_id) &&
+      !preg_match('/^node_[a-zA-Z0-9_]+_(delete_form)$/', $form_id) &&
+      !str_starts_with($form_id, 'node_type_')) {
+
+    // Retrieving the global configuration for per-node WebP conversion.
+    $config = \Drupal::config('image_webp_converter.settings');
+    $per_node_conversion_enabled = $config->get('per_node_conversion');
+
+    if ($per_node_conversion_enabled) {
+      $default_value = 0;
+
+      // Fetches the node from the current route.
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof NodeInterface) {
+        $default_value = \Drupal::keyValue('image_webp_converter')->get('webp_conversion_' . $node->id(), 0);
+      }
+
+      // Adding the checkbox for node add/edit forms.
+      $form['webp_conversion'] = [
+        '#type' => 'checkbox',
+        '#title' => t('<b>Convert images to WebP</b>'),
+        '#default_value' => $default_value,
+        '#description' => t('Check this box to convert the uploaded image to WebP format.'),
+        '#weight' => 1000,
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for nodes.
+ */
+function image_webp_converter_node_presave(NodeInterface $node) {
+  $request = \Drupal::request();
+  $webp_conversion_value = $request->request->get('webp_conversion') ? 1 : 0;
+
+  // Stores the checkbox state using Drupal key-value storage.
+  \Drupal::keyValue('image_webp_converter')->set('webp_conversion_' . $node->id(), $webp_conversion_value);
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function image_webp_converter_entity_presave(EntityInterface $entity) {
+  // Ensures the entity is a node.
+  if ($entity->getEntityTypeId() === 'node') {
+    // Checks if the WebP conversion checkbox is checked.
+    $webp_conversion = \Drupal::request()->get('webp_conversion');
+
+    // Proceed only if the checkbox is checked.
+    if ($webp_conversion) {
+      // Iterate through all the fields of the node.
+      foreach ($entity->getFieldDefinitions() as $field_name => $field_definition) {
+        // Checks if the field is an image field.
+        if ($field_definition->getType() === 'image') {
+          $field_value = $entity->get($field_name);
+
+          // Only proceed if the field has files (images).
+          if (!$field_value->isEmpty()) {
+            // Iterating over all items in the field.
+            foreach ($field_value as $delta => $item) {
+              $file = $item->entity;
+
+              // Ensures the file entity is valid.
+              if ($file instanceof FileInterface) {
+                $original_file_path = $file->getFileUri();
+                $path_info = pathinfo($original_file_path);
+                $extension = strtolower($path_info['extension']);
+                // Skip conversion if the file is already WebP.
+                if ($extension === 'webp') {
+                  continue;
+                }
+
+                // Converting the image to WebP.
+                $webp_file_path = image_webp_converter_convert_to_webp($original_file_path);
+
+                if ($webp_file_path) {
+                  // Creating a new file entity for the WebP file.
+                  $webp_file = File::create([
+                    'uri' => $webp_file_path,
+                    'status' => 1,
+                  ]);
+                  $webp_file->save();
+
+                  // Checking the file status.
+                  if ($file->isTemporary()) {
+                    $file->delete();
+                  }
+                  else {
+                    $file->delete();
+                  }
+
+                  // Setting the alt text for the WebP image in the field item.
+                  $alt_text = $item->alt;
+                  $entity->get($field_name)->set($delta, [
+                    'target_id' => $webp_file->id(),
+                    'alt' => $alt_text,
+                  ]);
+                }
+                else {
+                  \Drupal::logger('image_webp_converter')->error('WebP conversion failed for file @file', [
+                    '@file' => $file->getFileUri(),
+                  ]);
+                }
+              }
+            }
+          }
+        }
+        // Check for CKEditor fields (e.g., text_with_summary, text_long, text).
+        elseif (
+          // Handling CKEditor fields (e.g.,text_with_summary, text_long, text).
+          $field_definition->getType() === 'text_with_summary' ||
+          $field_definition->getType() === 'text_long' ||
+          $field_definition->getType() === 'text'
+        ) {
+          $field_value = $entity->get($field_name);
+
+          // Processes the CKEditor field value for image conversions.
+          if (!$field_value->isEmpty()) {
+            $body = $field_value->value;
+            // Regex pattern to match <img> tags with src attributes.
+            $pattern = '/<img[^>]+src=["\']([^"\']+)["\']/i';
+            if (preg_match_all($pattern, $body, $matches)) {
+              foreach ($matches[1] as $image_path) {
+                // Decodes the original image path for internal processing.
+                $decoded_image_path = urldecode($image_path);
+                $decoded_image_path_no_query = strtok($decoded_image_path, '?');
+
+                // Checks if the image is in the public files directory.
+                if (strpos($decoded_image_path_no_query, '/sites/default/files/') === 0) {
+                  // Convert the relative URL path to a stream wrapper URI.
+                  $relative_path = str_replace('/sites/default/files/', '', $decoded_image_path_no_query);
+                  $stream_wrapper_uri = 'public://' . $relative_path;
+
+                  // Check if the file exists in the filesystem.
+                  if (file_exists(\Drupal::service('file_system')->realpath($stream_wrapper_uri))) {
+                    $found_file = \Drupal::entityTypeManager()->getStorage('file')->loadByProperties(['uri' => $stream_wrapper_uri]);
+                    // Converts the file to WebP.
+                    $webp_file_path = image_webp_converter_convert_to_webp($stream_wrapper_uri);
+                    if ($webp_file_path) {
+                      foreach ($found_file as $file) {
+                        $file->setFileUri($webp_file_path);
+                        // Updates the filename to the WebP file name.
+                        $file->set('filename', basename($webp_file_path));
+                        $file->save();
+                        // Update the filemime to image/webp.
+                        \Drupal::database()->update('file_managed')
+                          ->fields(['filemime' => 'image/webp'])
+                          ->condition('uri', $webp_file_path)
+                          ->execute();
+                      }
+                      // Converts WebP file path to a public URL and encode it.
+                      $webp_url = str_replace('public://', '/sites/default/files/', $webp_file_path);
+                      $webp_url_encoded = rawurlencode(basename($webp_url));
+                      $webp_url = dirname($webp_url) . '/' . $webp_url_encoded;
+
+                      // Replaces the original encoded path.
+                      $body = str_replace($image_path, $webp_url, $body);
+                    }
+                    else {
+                      \Drupal::logger('image_webp_converter')->error('Failed to convert image to WebP: @path', [
+                        '@path' => $stream_wrapper_uri,
+                      ]);
+                    }
+                  }
+                  else {
+                    \Drupal::logger('image_webp_converter')->warning('File does not exist: @path', [
+                      '@path' => $stream_wrapper_uri,
+                    ]);
+                  }
+                }
+              }
+              // Updating the entity field with the modified body content.
+              $entity->set($field_name, [
+                'value' => $body,
+                'format' => $field_value->format,
+              ]);
+            }
+          }
+        }
+        // Checks for media references.
+        elseif (
+          $field_definition->getType() === 'entity_reference' &&
+          $field_definition->getSetting('target_type') === 'media'
+        ) {
+
+          $field_value = $entity->get($field_name);
+
+          if (!$field_value->isEmpty()) {
+            foreach ($field_value as $media_reference) {
+              $media_entity = $media_reference->entity;
+
+              if ($media_entity) {
+                // Iterates through all fields in the media entity.
+                foreach ($media_entity->getFieldDefinitions() as $media_field_name => $media_field_definition) {
+                  // Checking if the field is an image field.
+                  if ($media_field_definition->getType() === 'image') {
+                    $media_field_value = $media_entity->get($media_field_name);
+
+                    if (!$media_field_value->isEmpty()) {
+                      $file = $media_field_value->entity;
+
+                      if ($file instanceof FileInterface) {
+                        $original_file_path = $file->getFileUri();
+                        $path_info = pathinfo($original_file_path);
+                        $extension = strtolower($path_info['extension']);
+                        // Skip conversion if the file is already WebP.
+                        if ($extension === 'webp') {
+                          continue;
+                        }
+
+                        $webp_file_path = image_webp_converter_convert_to_webp($original_file_path);
+
+                        if ($webp_file_path) {
+                          // Creating a new file entity for the WebP file.
+                          $file->setFileUri($webp_file_path);
+                          $file->set('filename', basename($webp_file_path));
+                          $file->save();
+                          // Updates the filemime to image/webp.
+                          \Drupal::database()->update('file_managed')
+                            ->fields(['filemime' => 'image/webp'])
+                            ->condition('uri', $webp_file_path)
+                            ->execute();
+                          // Updates the media entity name.
+                          $media_entity->setName(basename($webp_file_path));
+                          $media_entity->save();
+                          \Drupal::service('file_system')->delete($original_file_path);
+                        }
+                        else {
+                          \Drupal::logger('image_webp_converter')->error('Failed to convert media image to WebP: @path', [
+                            '@path' => $original_file_path,
+                          ]);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Converts an image to WebP format.
+ */
+function image_webp_converter_convert_to_webp($file_path) {
+  // Checks if the file is already in WebP format and skip conversion.
+  if (strpos($file_path, '.webp') !== FALSE) {
+    return $file_path;
+  }
+  $config = \Drupal::config('image_webp_converter.settings');
+  $selected_converter = $config->get('selected_converter');
+  $image_quality = $config->get('quality');
+  $lossless = $config->get('lossless');
+
+  $file_system = \Drupal::service('file_system');
+  $stream_wrapper_manager = \Drupal::service('stream_wrapper_manager');
+
+  // Decoding the file path to handle encoded characters like %20.
+  $decoded_file_path = urldecode($file_path);
+
+  // Getting the real path for the source file.
+  $real_file_path = $file_system->realpath($decoded_file_path);
+  if (!$real_file_path || !file_exists($real_file_path)) {
+    \Drupal::logger('image_webp_converter')->error('File does not exist or is not readable: @file', ['@file' => $decoded_file_path]);
+    \Drupal::messenger()->addMessage(t('The file does not exist or is not readable: @file', ['@file' => $decoded_file_path]), 'error');
+    return NULL;
+  }
+
+  // Getting the scheme (e.g., temporary://, public://) from the file path.
+  $scheme = $stream_wrapper_manager->getScheme($decoded_file_path);
+  if (!$scheme) {
+    \Drupal::logger('image_webp_converter')->error('Failed to determine the scheme for file: @file', ['@file' => $decoded_file_path]);
+    return NULL;
+  }
+
+  // Extracting the directory and file name.
+  $directory = dirname($decoded_file_path);
+  $path_info = pathinfo($real_file_path);
+  $file_name = $path_info['filename'];
+
+  // Constructing the destination WebP file path.
+  $destination = $scheme . '://' . basename($directory) . '/' . $file_name . '.webp';
+
+  // Ensuring the destination directory exists.
+  $destination_dir = dirname($destination);
+  $file_system->prepareDirectory($destination_dir, FileSystemInterface::CREATE_DIRECTORY);
+
+  // Getting the real path for the destination file.
+  $real_destination_path = $file_system->realpath($destination);
+
+  // Validating the selected converter.
+  $valid_converters = ['cwebp', 'gd', 'imagick'];
+
+  // Checks if the selected converter is valid.
+  if (!in_array($selected_converter, $valid_converters)) {
+    \Drupal::logger('image_webp_converter')->warning('Invalid or missing converter selected. Using default converter (gd).');
+    \Drupal::messenger()->addMessage(t('Invalid or missing converter selected. Using default converter (gd).'), 'warning');
+    $selected_converter = 'gd';
+  }
+
+  // Validating the availability of the required extension.
+  $error_message = '';
+  switch ($selected_converter) {
+    case 'cwebp':
+      break;
+
+    case 'gd':
+      if (!extension_loaded('gd')) {
+        $error_message = t('The "gd" converter requires the GD PHP extension, which is not installed or enabled on this server.');
+      }
+      break;
+
+    case 'imagick':
+      if (!extension_loaded('imagick')) {
+        $error_message = t('The "imagick" converter requires the Imagick PHP extension, which is not installed or enabled on this server.');
+      }
+      break;
+  }
+
+  // If an error occurred, log it and show a user-friendly message.
+  if (!empty($error_message)) {
+    \Drupal::logger('image_webp_converter')->error($error_message);
+    \Drupal::messenger()->addMessage($error_message, 'error');
+    return NULL;
+  }
+
+  try {
+    $options = [
+      'converters' => [$selected_converter],
+    ];
+    $options['png'] = [
+      'encoding' => 'lossy',
+      'near lossless' => 60,
+    ];
+    $options['jpeg'] = [
+      'encoding' => 'lossy',
+      'auto-limit' => TRUE,
+    ];
+    // Appling quality or lossless settings based on configuration.
+    if ($lossless) {
+      $options['png']['encoding'] = 'lossless';
+    }
+    $options['quality'] = $image_quality ??= 85;
+    // Converting the image to WebP using WebPConvert.
+    WebPConvert::convert($real_file_path, $real_destination_path, $options);
+    \Drupal::messenger()->addMessage(t('Images converted to WebP'));
+    // Returning the destination URI so it can be saved in Drupal.
+    return $destination;
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('image_webp_converter')->error('WebP conversion failed for file "@file". Error: @message', [
+      '@file' => $file_path,
+      '@message' => $e->getMessage(),
+    ]);
+    return NULL;
+  }
+}

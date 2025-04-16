@@ -1,0 +1,27 @@
+
+<header class="header-section">
+  <div class="container-fluid p-0">
+    <div class="row g-2 g-md-0">
+        <div class="col-sm-6 site-brand"> 
+            {{ page.site_brand }}
+            <div class="mobile-menu">{{ page.mobile_menu }}</div>
+        </div>      
+      <div class="col-sm-6 top-menu">{{ page.top_navigation }}</div>
+      
+    </div>
+  </div>
+</header>
+
+<nav class="man-navigation-wrapper">
+  {% if page.main_navigation %}
+    <div class="container-lg parent-menu"> {{ page.main_navigation }}</div>
+  {% endif %}
+
+  {% if page.teen_navigation %}
+    <div class="container-lg teens-menu"> {{ page.teen_navigation }}</div>
+  {% endif %}
+
+  {% if page.kid_navigation %}
+    <div class="container-lg kids-menu"> {{ page.kid_navigation }}</div>
+  {% endif %}
+</nav>

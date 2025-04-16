@@ -1,0 +1,12 @@
+name: Video
+core_version_requirement: ^9 || ^10
+type: module
+description: A field type for storing uploaded or embedded videos.
+package: Field types
+dependencies:
+  - drupal:file
+
+# Information added by Drupal.org packaging script on 2023-12-05
+version: '3.0.5'
+project: 'video'
+datestamp: 1701768283

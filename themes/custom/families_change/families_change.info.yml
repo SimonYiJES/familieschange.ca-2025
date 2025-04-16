@@ -1,0 +1,41 @@
+name: 'Families Change'
+type: theme
+description: 'Families Change subtheme based on Bootstrap 5 theme.'
+core_version_requirement: '^9.4 || ^10'
+'base theme': bootstrap5
+libraries:
+  - families_change/global-styling
+ckeditor_stylesheets:
+  - css/style.css
+ckeditor5-stylesheets:
+  - css/ck5style.css
+regions:
+  site_brand: 'Site Branding'
+  slogan: 'Slogan'
+  top_navigation: 'Main Navigation'
+  main_navigation: 'Parent Navigation'
+  teen_navigation: 'Teens Navigation'
+  kid_navigation: 'Kid Navigation'
+  mobile_menu: 'Mobile Menu'
+  breadcrumb: 'Breadcrumbs'
+  banner: 'Banner'
+  need_help: 'Need Help with'
+  appropriate_advice: 'Apropriate Advice'
+  family_support: 'Families Support'
+  aces: 'ACEs'
+  system_help_education: 'System Help Education'
+  content_top: 'Content Top'
+  content: 'Main content'
+  content_bottom: 'Content bottom'
+  success_stories: 'Success Stories'
+  quick_links: 'Quick Links'
+  sidebar_first: 'Sidebar First'
+  sidebar_second: 'Sidebar Second'
+  footer_logo: 'Footer logo'
+  footer_column_first: 'Footer Column First'
+  footer_column_second: 'Footer Column Second'
+  footer_column_third: 'Footer Column Third'
+  footer_top_bottom_ipad: 'Footer Top Bottom Ipad'
+  footer_bottom: 'Privacy policy & Copyright'
+libraries-override:
+  bootstrap5/global-styling: false

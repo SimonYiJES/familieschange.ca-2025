@@ -1,0 +1,7 @@
+{% for item in items %}
+    {% if item.content['#url']  %}
+        <div class="next-btn">
+            <a href="{{ item.content['#url'] }}" title="{{ item.content['#title'] }}">>></a>
+        </div>
+    {% endif %}
+{% endfor %}

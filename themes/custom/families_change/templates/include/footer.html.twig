@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Theme override to display a single component.
+ *
+ * footer area template
+ */
+#}
+
+<footer id="footer-area">
+  <section class="footer-top-area">
+    <div class="container"> 
+        {# <h2 class="footer-title">FAMILIES CHANGE</h2>      #}
+        <h2 class="footer-title">{{ page.footer_logo }}</h2>     
+        <div class="row">      
+        {% if page.footer_column_first %}
+            <div class="footer-top-column-first col-sm-5">{{ page.footer_column_first }}</div>
+        {% endif %}
+        {% if page.footer_column_second %}
+            <div class="footer-top-column-second col-sm-4">{{ page.footer_column_second }}</div>
+        {% endif %}
+        {% if page.footer_column_third %}
+            <div class="footer-top-column-third col-sm-3">{{ page.footer_column_third }}</div>
+        {% endif %}
+        {% if page.footer_top_bottom_ipad %}
+            <div class="footer-top-bottom-ipad">{{ page.footer_top_bottom_ipad }}</div>
+        {% endif %}       
+        </div>  
+    </div>  
+  </section>
+
+  <section class="footer-bottom-area">
+    <div class="container-fluid">
+        {% if page.footer_bottom %}
+            <div class="footer-bottom-wrapper">{{ page.footer_bottom }}</div>
+        {% endif %}
+    </div>
+  </section>
+</footer>

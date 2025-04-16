@@ -1,0 +1,20 @@
+image_webp_converter.settings:
+  type: config_object
+  label: 'WebP Converter Settings'
+  mapping:
+    selected_converter:
+      type: string
+      label: 'Selected WebP Converter'
+      default: 'cwebp'
+    quality:
+      type: integer
+      label: 'Image Quality'
+      default: 85
+    lossless:
+      type: integer
+      label: 'Lossless Compression'
+      default: 0
+    per_node_conversion:
+      type: integer
+      label: 'Enable Per-Node WebP Conversion'
+      default: 0

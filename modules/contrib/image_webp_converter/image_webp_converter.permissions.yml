@@ -1,0 +1,8 @@
+administer image webp converter:
+  title: 'Administer Image WebP Converter settings'
+  description: 'Allows users to configure Image WebP Converter module settings.'
+  restrict access: true
+
+convert images to webp:
+  title: 'Convert images to WebP'
+  description: 'Allows users to convert uploaded images to WebP format.'

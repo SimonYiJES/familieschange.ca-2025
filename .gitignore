@@ -1,0 +1,8 @@
+vendor/
+sites/*/settings.php
+sites/*/settings*.php
+sites/*/files/
+sites/*/services*.yml
+*.log
+*.sqlite
+node_modules/

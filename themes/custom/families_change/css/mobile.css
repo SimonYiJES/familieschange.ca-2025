@@ -1,0 +1,1050 @@
+@media screen and (min-width: 0px) and (max-width:767px) {
+
+    /* --------------- Header --------------------- */
+    .mobile-menu {
+        display: block;
+    }
+
+    .mobile-menu #superfish-mobile-menus-toggle {
+        display: block;
+        width: 40px;
+        height: 38px;
+        background-image: url("../images/hamburger-menu.svg");
+        font-size: 0;
+    }
+
+    .header-section{
+        padding-bottom: 15px;
+    }
+
+    .header-section .row {
+        flex-direction: column-reverse;
+        align-items: end;
+    }
+
+    .site-brand {
+        /* position: relative; */
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: end;
+    }
+
+    .header-section .site-brand .navbar-brand div {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .header-section .site-brand .navbar-brand .site-slogan{
+        display: block;
+        font-family: Open Sans;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 14px;
+        text-align: left;
+        color: var(--third-color);
+    }
+    .path-frontpage .header-section{
+        padding-bottom: 8px;
+    }
+    .path-frontpage .header-section .site-brand{
+        align-items: center;
+    }
+    .path-frontpage .header-section .site-brand .navbar-brand .site-slogan{
+        display: none;
+    }
+    
+
+    /* .top-menu .nav.navbar-nav {
+        flex-direction: row-reverse;
+    } */
+
+    .top-menu .nav.navbar-nav li a {
+        font-size: 12px;
+        font-weight: 700;
+        padding-left: 14px;
+        padding-right: 14px;
+        margin-right: 15px;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion {
+        position: absolute;
+        top: 100px !important;
+        left: 0px !important;
+        background: var(--white);
+        z-index: 999;
+        height: -webkit-fill-available;
+        overflow-y: auto;
+        padding-bottom: 100px;
+
+    }
+    .user-logged-in .site-brand #superfish-mobile-menus-accordion{
+        top: 143px !important;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion::before {
+        position: absolute;
+        background: var(--white);
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    /* .top-menu .nav.navbar-nav li:has(a.is-active)  {
+        display: none;
+    } */
+    .top-menu .nav.navbar-nav li:not(:first-child):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)) {
+        display: none;
+    }
+    .teen-page .top-menu .nav.navbar-nav li:nth-child(3),
+    .parent-page .top-menu .nav.navbar-nav li:nth-child(4) {
+        display: none;
+    }
+    .teen-page .top-menu .nav.navbar-nav li:nth-child(4) {
+        display: block !important;
+    }
+  
+    .top-menu {
+        width: 100%;
+    }
+
+    .top-menu .region.region-top-navigation {
+        /* justify-content: end; */
+        gap: 0;
+    }
+
+    .man-navigation-wrapper #superfish-main-toggle {
+        display: none;
+    }
+
+    /* ---------------- Mobile menu --------------  */
+    .site-brand #superfish-mobile-menus-accordion .sf-no-children:first-child {
+        border-bottom: 1px solid var(--third-color);
+    }
+    .site-brand #superfish-mobile-menus-accordion a.sf-depth-1 {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 22.4px;
+        font-family: Open Sans;
+        height: 56px;
+        color: var(--first-color);
+        border-bottom: 1px solid var(--third-color);
+        text-decoration: none;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-1.menuparent.sf-expanded a.sf-depth-1 {
+        color: var(--white);
+        background: var(--first-color);
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-1.menuparent a.sf-depth-1.menuparent,
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-2.menuparent a.sf-depth-2.menuparent {
+        position: relative;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-2.menuparent.sf-expanded a.sf-depth-2.menuparent {
+        font-weight: 700;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion a.sf-depth-1.menuparent::after {
+        position: absolute;
+        content: "";
+        width: 24px;
+        height: 24px;
+        background: url('../images/menu-close.png');
+        background-size: contain;
+        top: auto;
+        right: 15px;
+        bottom: auto;
+        z-index: 1;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-1.menuparent.sf-expanded a.sf-depth-1.menuparent::after {
+        position: absolute;
+        content: "";
+        width: 24px;
+        height: 24px;
+        background: url('../images/menu-open.png');
+        background-size: contain;
+        top: auto;
+        right: 15px;
+        bottom: auto;
+        z-index: 1;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-1:nth-child(4) {
+        width: 50%;
+        text-align: center;
+        position: relative;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-1:nth-child(4)::after {
+        content: '';
+        position: absolute;
+        height: 50%;
+        width: 1px;
+        right: 0;
+        top: 25%;
+        background: #1f1f1f;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-1:nth-child(5) {
+        width: 50%;
+        text-align: center;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-1:nth-child(5) a.sf-depth-1 {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-1:nth-child(5) a.sf-depth-1::after {
+        content: '';
+        background: url(../images/just-JES-green-02-teem.svg) no-repeat;
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+        top: 12px;
+        margin-left: 10px;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.menuparent ul li.sf-clone-parent {
+        display: none;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion a.sf-depth-2 {
+        font-family: Open Sans;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 19.6px;
+        color: var(--mobile-menu-color);
+        background: var(--mobile-menu-bg);
+        text-decoration: none;
+        border-radius: 8px;
+        margin: 15px 15px 0 15px;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion a.sf-depth-2:hover, 
+    .site-brand #superfish-mobile-menus-accordion li.active-trail a.is-active.sf-depth-2 {
+        background: var(--mobile-menu-hover-bg);
+    }
+    .site-brand #superfish-mobile-menus-accordion a.sf-depth-3 {
+        font-family: Open Sans;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 19.6px;
+        color: var(--mobile-menu-3rd-color);
+        background: var(--white);
+        text-decoration: none;
+        margin-left: 40px;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion a.sf-depth-2.menuparent::after {
+        position: absolute;
+        content: "";
+        width: 16px;
+        height: 9px;
+        background: url('../images/mobile-close-one.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        top: 20px;
+        right: 15px;
+        z-index: 1;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.sf-depth-2.menuparent.sf-expanded a.sf-depth-2.menuparent::after {
+        position: absolute;
+        content: "";
+        width: 16px;
+        height: 9px;
+        background: url('../images/mobile-open-two.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        top: 20px;
+        right: 15px;
+        z-index: 1;
+    }
+    
+    .activity-wrapper .row {
+        flex-direction: column !important;
+    }
+
+    /* .site-brand #superfish-mobile-menus-accordion #search-block-form {
+        display: none;
+    } */
+
+    .site-brand #superfish-mobile-menus-accordion li.mobile-menu-search-form {
+        padding: 15px 20px !important;
+        border-top: 1px solid #e9ecef !important;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.mobile-menu-search-form form .form-type-search {
+        width: 100% !important;
+    }
+
+    .site-brand #superfish-mobile-menus-accordion li.mobile-menu-search-form form .form-type-search input {
+        border-radius: 20px;
+        background: #e9ecef;
+        border: none;
+        padding: 10px 20px !important;
+    }
+
+    /* ----------------- Footer ------------------  */
+    .footer-top-bottom-ipad {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .footer-top-column-second {
+        display: none;
+    }
+
+    .footer-top-column-second p {
+        max-width: 100%;
+    }
+
+    .footer-top-column-first img {
+        height: 75px;
+    }
+
+    .footer-top-column-first {
+        width: 55%;
+    }
+
+    .footer-top-column-third {
+        width: 40%;
+    }
+
+    .footer-title {
+        font-family: Signika;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 28px;
+    }
+
+    .btn-social-icon .donate-now {
+        font-size: 12px;
+        line-height: 16.34px;
+        padding: 15px 35px;
+    }
+
+    .btn-social-icon {
+        margin-top: 45px;
+    }
+
+    .social-icon {
+        margin-top: 50px;
+    }
+
+    .social-icon img {
+        margin-right: 5px;
+        border-radius: 5px;
+    }
+
+    .footer-bottom-wrapper .bootom-right {
+        text-align: left;
+    }
+
+    /* --------------  Image Title Description and CTA Block type -------------- */
+    .block-banner .row {
+        flex-direction: column-reverse;
+    }
+
+    .block-banner .row .col-sm-6,
+    .success-stores-slide .success-row .col-sm-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .block-banner .title {
+        font-size: 24px;
+        line-height: 32px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .block-banner .description {
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    .block-banner .image img {
+        /* margin-top: 60px; */
+        max-width: 100% !important;
+    }
+
+    .block-banner .cta a {
+        font-size: 14px;
+        line-height: 19.07px;
+    }
+
+    .block-banner .cta a::before {
+        top: 18px;
+    }
+
+    .block-banner::before,
+    .block-banner::after,
+    .block-banner .image::before {
+        display: none;
+    }
+
+    .teen-page .block-banner::before{
+        display: block;
+        height: 250px;
+        width: 200px;
+        bottom: -30px;
+    }
+    .teen-page .block-banner::after{
+        display: block;
+        height: 250px;
+        width: 140px;
+        top: -104px;
+    }
+
+
+
+    /* ---------- Need Help -----------  */
+    .need-help-wrapper .need-help-listing .help-row{
+        margin-bottom: 10px !important;
+    }
+    .need-help-wrapper .need-help-listing .help-row .help-row .views-field-field-upload-image {
+        display: none;
+    }
+
+    .need-help-wrapper .need-help-listing .help-row .ui-accordion-header,
+    .need-help-wrapper .need-help-listing .help-row .help-row:has(.ui-accordion-content-active) .ui-accordion-header {
+        font-size: 16px;
+        line-height: 21.79px;
+        padding: 16px 22px 16px 55px;
+    }
+
+    .need-help-wrapper .need-help-listing .ui-accordion-content-active span {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        line-height: 20px !important;
+    }
+
+    .need-help-wrapper .need-help-listing .help-row .views-field-field-cta a {
+        font-size: 15px;
+    }
+
+    .need-help-wrapper .need-help-listing .help-row .ui-accordion-header::before {
+        width: 24px;
+        height: 24px;
+        top: 16px;
+    }
+
+    .need-help-wrapper .need-help-listing .ui-accordion-content-active,
+    .need-help-wrapper .ui-accordion .ui-accordion-header {
+        padding-left: 55px;
+    }
+
+    /* ----------Families Support -----------  */
+    .col-sm-4.title-description {
+        width: 100%;
+    }
+
+    .col-sm-4.title-description .title,
+    .title-description .description,
+    .title-description .description p,
+    .aces-wrapper .view-header h2,
+    .aces-wrapper .view-header h2 p,
+    .success-stories-wrapper .view-header h2 {
+        text-align: center;
+    }
+
+    .block-family-support .image-section {
+        margin-top: 20px;
+        width: 50%;
+    }
+
+    .aces-list .detail-heading {
+        max-width: 90%;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 16.34px;
+    }
+
+    .aces-list {
+        padding: 1px 24px 1px 15px;
+    }
+
+    .aces-list details[open] summary::before {
+        rotate: 180deg;
+        top: calc(0%);
+        transform: translateY(5%);
+    }
+
+    .success-stores-slide .success-row {
+        flex-direction: column;
+    }
+
+    .teen-success-stories .success-stores-slide .success-row{
+        flex-direction: column-reverse;
+    }
+
+    .success-stores-slide .success-row .right-section {
+        margin-top: 30px;
+    }
+
+    .success-stories-wrapper .views_slideshow_controls_text {
+        position: unset;
+        transform: translate(0%, 35px);
+        justify-content: center;
+        gap: 24px;
+        margin-top: 15px;
+    }
+
+    .success-stories-wrapper .views_slideshow_controls_text .views_slideshow_controls_text_previous a,
+    .success-stories-wrapper .views_slideshow_controls_text .views_slideshow_controls_text_next a {
+        width: 24px;
+        height: 24px;
+    }
+
+    .success-stories-wrapper .right-section {
+        position: unset;
+    }
+
+    .success-stories-wrapper .view-header {
+        position: relative;
+        z-index: 5;
+    }
+
+    .success-stories-wrapper .right-section {
+        position: relative;
+    }
+    .success-stories-wrapper .right-section::before {
+        top: 8px;
+        left: 0px;
+        transform: translateY(-20px);
+        /* top: calc(50%); */
+    }
+
+    .success-stories-wrapper .right-section::after,
+    .success-stories-wrapper .right-section::before {
+        width: 75px;
+        height: 75px;
+    }
+
+    .success-stories-wrapper .right-section::after {
+        right: 25px;
+        bottom: 30px;
+    }
+
+    .footer-bottom-wrapper .bootom-left,
+    .footer-bottom-wrapper .bootom-right {
+        width: 100%;
+    }
+
+    .footer-bottom-wrapper .bootom-right {
+        margin-top: 20px;
+    }
+    .success-row img {
+        max-height: 200px;
+        width: auto;    
+    }
+    .footer-top-column-third .nav.navbar-nav li a {
+        font-size: 10px;
+        line-height: 16px;
+        font-weight: 700;
+        font-family: 'Open Sans';
+    }
+    /*+++++++++++++ Help page +++++++++++++++++++*/
+
+    .help-page-wrapper .js-form-item.form-type-select {
+        top: 1.5%;
+        right: 75px;
+    }
+
+    .help-page-wrapper .view-header img {
+        width: 100%;
+        margin-top: 70px;
+    }
+
+    .fr .help-page-wrapper .view-header img {
+        margin-top: 70px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .help-page h1 {
+        padding: 2px 0 0 50px;
+        font-size: 16px;
+    }
+
+    .help-page-wrapper {
+        padding-top: 5px;
+    }
+
+    .help-page {
+        margin-top: 0px;
+    }
+
+    .help-listing .help-tags ul li {
+        padding: 7px 11px;
+        text-align: center;
+    }
+
+    .help-page .container{
+        overflow: hidden;
+    }
+/*========= parents/impact-violence-kids =============*/
+.key-takeaway-wrapper .key-takeaway-content p {
+    font-size: 15px !important;
+    line-height: 24px !important;
+    padding-right: 0px !important;
+}
+
+.activity-wrapper .field.field--name-field-upload-image {
+    text-align: center;
+}
+
+.activity-wrapper .field--name-field-title {
+    text-align: center;
+}
+
+.activity-wrapper .download-preview {
+    justify-content: center;
+}
+
+/*====== Question Answer ==========*/
+    .question--data {
+        max-width: 100% !important;
+        margin-left: 28px !important;
+    }
+    .answer--data {
+        max-width: 100% !important;
+        margin-right: 28px !important;
+    }
+    .qa-nav {
+        top: inherit !important;
+        bottom: -13px !important;
+    }
+    .question--answer--main {
+        padding: 15px 15px 25px 15px !important;
+    }
+    .question--answer--main h4 {
+        margin-bottom: 1rem !important;
+    }
+    .help-page-wrapper .view-header .sorting {
+        flex-direction: column;
+    }
+
+    .help-page-wrapper .view-header p {
+        margin-right: unset !important;
+        font-size: 16px !important;
+    }
+
+    #custom-sorting-element #selected-option {
+        min-width: 220px !important;
+        
+    }
+
+    #custom-sorting-element {
+        min-width: 215px;
+    }
+    #block-families-change-ageappropriate .teenagers {
+        margin-bottom: 60px !important;
+    }
+
+
+}
+
+@media screen and (max-width: 530px) {
+    .footer-top-column-first {
+        width: 50%;
+    }
+
+    .footer-top-column-third .nav.navbar-nav li:nth-child(5) a::after {
+        width: 25px;
+        height: 26px;
+        left: 52px;
+        top: 36px;
+        background-size: contain;
+    }
+
+    .btn-social-icon .donate-now {
+        font-size: 12px;
+        line-height: 16.34px;
+        padding: 12px 16px;
+        display: block;
+    }
+
+    .social-icon {
+        margin-top: 30px;
+    }
+
+    .btn-social-icon {
+        margin-top: 25px;
+    }
+
+    .footer-top-column-first #block-families-change-justiceeducationsociety {
+        margin-top: 7px;
+        word-break: break-all;
+    }
+
+    #footer-area #block-families-change-footerlogo {
+        margin-top: 45px;
+    }
+
+}
+
+/***************** node-23 *****************************/
+@media (min-width: 0px) and (max-width: 767px) {
+    .aces-list summary::before {
+        transform: translateY(-25%);
+        top: 50%;
+    }
+
+    .aces-list details[open] summary::before {
+        transform: translateY(12px);
+        top: 50%;
+    }
+
+    .success-stories-wrapper .view-header h2 {
+        text-align: left;
+    }
+
+
+}
+
+/*******************************************************************/
+
+/*********************** Header-section ***************************/
+@media (min-width: 0px) and (max-width: 767px) {
+    ul#superfish-mobile-menus-accordion li a:last-child {
+        border-bottom: none !important;
+    }
+
+    .region-mobile-menu .contextual-region {
+        /* position: relative; */
+        position: unset;
+    }
+
+    .mobile-menu-search-form {
+        position: relative;
+    }
+
+    li.mobile-menu-search-form {
+        border-top: 1px solid #DFDFDF;
+    }
+
+    .mobile-menu-search-form input#edit-submit {
+        background: url(../images/search-Icon.png) no-repeat;
+        width: 20px;
+        height: 20px;
+        border: none;
+        position: absolute;
+        top: 47%;
+        right: 8%;
+        background-position: center;
+        font-size: 0;
+    }
+
+    .mobile-menu-search-form input[type=search] {
+        border-radius: 50px;
+        background: #F0F0F0;
+        border: none;
+        height: 40px;
+        font-size: 14px;
+        font-weight: 400;
+        font-family: 'Open Sans';
+        font-style: italic;
+        color: #7C7C7C;
+        line-height: 16.8px;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .mobile-menu-search-form #search-block-form {
+        /* display: flex; */
+        display: unset;
+    }
+
+    .mobile-menu-search-form .form-control {
+        width: 90%;
+        margin: auto;
+    }
+
+    .header-section .site-title {
+        font-size: 24px;
+        letter-spacing: unset;
+        line-height: 24px;
+    }
+
+    .parent-banner .block-banner .title {
+        line-height: 32px;
+        margin-top: 20px;
+    }
+
+    .block-banner .cta {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .parent-banner .block-banner .container::before {
+        display: none;
+    }
+
+    .need-help-wrapper .need-help-listing .help-row .ui-accordion-header::before {
+        top: 14px;
+    }
+
+    .need-help-wrapper .need-help-listing .help-row .help-row:has(.ui-accordion-content-active) .ui-accordion-header::before {
+        top: 14px;
+    }
+
+    .block-family-support .whole-wrapper .title,
+    .aces-wrapper .view-header p {
+        text-align: center;
+    }
+
+}
+
+@media screen and (max-width: 530px) {
+    /* .site-brand #superfish-mobile-menus-accordion {
+        top: 103px !important;
+        
+    } */
+}
+
+/*******************************************************************/
+
+/*********************** Footer-section ***************************/
+@media (min-width: 0px) and (max-width: 767px) {
+    .social-icon P {
+        display: flex;
+        gap: 15px;
+    }
+
+    .footer-top-column-first h2,
+    .footer-top-column-second h2,
+    .footer-top-bottom-ipad h2 {
+        font-size: 11px;
+        line-height: 14.98px;
+        word-break: break-word;
+
+    }
+
+    .footer-top-column-first p,
+    .footer-top-column-second p,
+    .footer-top-bottom-ipad p {
+        font-size: 11px;
+        line-height: 14.98px;
+        margin-bottom: 1rem;
+    }
+
+    .footer-bottom-wrapper .bootom-left,
+    .footer-bottom-wrapper .bootom-right {
+        font-size: 12px;
+        line-height: 18.07px;
+    }
+
+    .footer-top-area {
+        padding: 30px 20px 20px 20px;
+    }
+
+    section.footer-bottom-area {
+        padding: 15px 5%;
+    }
+
+}
+
+/*******************************************************************/
+
+/************************* Mid-content *****************************/
+@media (min-width: 0px) and (max-width: 767px) {
+
+    /* .default-homepage-banner .block-banner .container::after {
+        transform: translateX(0%);
+        width: 300px;
+        height: 50%;
+        bottom: 26px;
+    } */
+
+    .default-homepage-banner .block-banner .container::after {
+        right: 35px;
+        width: 169px;
+        height: 30%;
+    }
+
+    .default-homepage-banner .block-banner .container::before {
+        width: 138px;
+        height: 30%;
+    }
+
+    .default-homepage-banner .block-banner .title {
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 50px;
+    }
+
+    .block-banner {
+        padding: unset;
+    }
+
+    .block-banner .cta {
+        text-align: center;
+    }
+
+    .description p {
+        text-align: center;
+    }
+
+    h2.top-heading.text-center {
+        font-size: 24px !important;
+        line-height: 32px !important;
+        padding-top: 45px;
+    }
+
+    .age-appropriate-advice .top-description {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    .block-family-support .image-section img {
+        height: 170px;
+    }
+
+    .block-family-support .cta a {
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 16.34px;
+    }
+
+    .block-family-support .sort-description {
+        font-size: 10px;
+        line-height: 20px;
+    }
+
+    .block-family-support .parent .age-group-title,
+    .block-family-support .teenagers .age-group-title,
+    .block-family-support .kid .age-group-title {
+        margin-top: 20px;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    body.overflow {
+        overflow: hidden;
+    }
+    .success-stories-wrapper .view-header h2 {
+        text-align: center;
+    }
+    .block-banner.Left .image img {
+        margin-bottom: 30px;
+    }
+
+    input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      
+      input[type="search"]::-ms-clear {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+      
+      input[type="search"]::-ms-reveal {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+      
+      /* input[type="search"] {
+        -ms-clear: none;
+        -ms-reveal: none;
+      } */
+    /*********************** Parents-site ***************************/
+    .block-family-support .image-section {
+        width: unset;
+        margin: auto;
+        padding-top: 20px;
+    }
+
+    /* ------------------- About Page -------------------- */
+    .block-banner.about-jes h2.label.label-mobile {
+        display: block;
+        font-family: Open Sans;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 21.79px;
+        text-align: left;
+        margin: 30px 0;
+    }
+    .block-banner.about-jes h2.label.label-desktop-tab {
+        display: none;
+    }
+
+    /* parents/financial-abuse page */
+
+    .paragraph--type--h2-body .field--name-field-descriptions img {
+        width: 100%;
+        height: auto;
+    }
+    .carousel-control-prev, 
+    .carousel-control-next {
+        top: 100% !important;
+        width: 3rem !important;
+    }
+
+/****** parents/telling-your-kids ***********/
+    .key-takeaway-wrapper .key-takeaway-img img {
+        display: none !important;
+    }
+
+    .key-takeaway-wrapper .key-takeaway-content p {
+        font-size: 20px !important;
+        padding-right: 3px !important;
+    }
+    .key-takeaway-wrapper .key-takeaway-img {
+        flex: unset !important;
+    }
+    /* .key-takeaway-wrapper .key-takeaway-content::before {
+        width: 72% !important;
+        left: 117px !important;
+    } */
+
+    .key-takeaway-wrapper .key-title {
+        top: -20px !important;
+    }
+    .paragraph--type--main-content-video-single-main-c iframe {
+        height: 250px;
+    }
+    .paragraph--type--main-content-video-single-main-c .vp-center {
+        display: unset !important;
+    }
+
+    .single-main-content-video {
+        margin-bottom: unset !important;
+    }
+    .key-takeaway-wrapper{
+       margin-bottom: 2rem !important;
+    }
+
+}
+@media screen and (min-width: 576px) and (max-width:767px) {
+    .age-appropriate-advice .col-sm-4 {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 390px) and (max-width:767px){
+    .help-page-wrapper .view-header .sorting {
+        margin-top: 30px;
+    }
+}
+
+@media screen and (min-width: 680px) and (max-width:767px){
+    .help-page-wrapper .view-header .sorting {
+        margin-top: 50px;
+    }
+}
+
+
+
+
+/*******************************************************************/
+

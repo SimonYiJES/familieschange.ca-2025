@@ -1,0 +1,15 @@
+name: 'Image WebP Converter'
+type: module
+description: 'Converts already uploaded images to WebP and updates all references along with their filenames.'
+core_version_requirement: ^10 | ^11
+package: Custom
+dependencies:
+  - drupal:file
+  - drupal:image
+configure: image_webp_converter.settings
+permissions: image_webp_converter.permissions
+
+# Information added by Drupal.org packaging script on 2025-02-05
+version: '1.0.0'
+project: 'image_webp_converter'
+datestamp: 1738758838

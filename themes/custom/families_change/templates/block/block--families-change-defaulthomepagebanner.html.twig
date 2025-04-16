@@ -1,0 +1,104 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main content
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+<div{{ content_attributes.addClass('content') }}>
+
+{% set link = content.field_cta.0['#url'] %}
+{% set link_title = content.field_cta.0['#title'] %}
+{% set image_alignment = content.field_image_alignment[0]['#markup']|striptags %}
+{# {% set image_url = file_url(content.field_upload_image.0['#item'].entity.uri.value) %} #}
+
+<div class="default-homepage-banner">
+    <div class="block-banner {{ image_alignment }}">
+        <div class="container">
+            <div class="row">          
+                <div class="col-md-5 image">
+                  {% if content.field_upload_video %}
+                      {% for item in content.field_upload_video['#items'] %}
+                          {% set file_url = file_url(item.entity.fileuri) %}
+                          {% set file_extension = file_url|split('.')|last|lower %}
+
+                          {% if file_extension in ['mp4', 'webm', 'ogg'] %}
+                              <video autoplay muted loop>
+                                  <source src="{{ file_url }}" type="video/{{ file_extension }}">
+                              </video>
+                          {% elseif file_extension == 'gif' %}
+                              <img src="{{ file_url }}" alt="Animated GIF">
+                          {% endif %}
+                      {% endfor %}
+                  {% endif %}
+                </div>         
+
+            <div class="col-md-7 title-desc">
+                {% if content.field_heading %}
+                    <h2 class="title">{{ content.field_heading|raw }}</h2>
+                {% endif %}
+                
+                    {% if content.body %}
+                    <div class="description">{{ content.body|raw }}</div>
+                {% endif %}
+
+                {# {% if link_title %}
+                    <div class="cta">
+                    <a href="{{ link }}">{{ link_title }}</a>
+                    </div>
+                {% endif %} #}
+            </div>
+            
+            </div>
+        </div>
+        <!-- Video Modal -->
+        <div id="videoModal" class="modal">
+          <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <iframe id="videoFrame" src="{{ link }}" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+</div>

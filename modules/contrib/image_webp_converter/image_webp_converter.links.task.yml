@@ -1,0 +1,10 @@
+image_webp_converter.batch_form:
+  route_name: image_webp_converter.batch_form
+  title: 'Convert Images Sitewide (Batch Process)'
+  base_route: image_webp_converter.link
+  weight: 0
+image_webp_converter.settings:
+  route_name: image_webp_converter.settings
+  title: 'WebP Converter Settings'
+  base_route: image_webp_converter.link
+  weight: 1
